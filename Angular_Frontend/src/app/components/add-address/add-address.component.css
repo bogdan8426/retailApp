@@ -1,0 +1,73 @@
+textarea{
+    background-color: rgba(100,100,100,0.9);
+    font-size: 15px;
+    color:white;
+    width: 99%;
+    height: 100px;
+    padding: 12px 20px;
+    margin: 8px 8px;
+    display: inline-block;
+    border:none;
+    outline-color:#990000;
+}
+  input[type=text] {
+  background-color: rgba(100,100,100,0.9);
+  font-size: 15px;
+  color:white;
+  width: 97%;
+  height: 50px;
+  padding: 12px 20px;
+  margin: 8px 8px;
+  display: inline-block;
+  border:none;
+  outline-color:#990000;
+}
+ a{
+   float:right;
+   color:#2a2730;
+   text-decoration: none;
+   font-size: 20px;
+ }
+ a:hover{
+   font-weight: bold;
+   text-decoration: none;
+   color:#111111;
+ }
+ label{
+   font-weight: bold;
+   margin-left: 10px;
+   color:#2a2730;
+   font-size:20px;
+ }
+::placeholder{
+  color:white;
+}
+.button {
+  background-color: #990000;
+  font-size: 17px;
+  color: white;
+  padding: 12px 20px;
+  margin: 8px 8px;
+  border: none;
+  cursor: pointer;
+  height: 50px;
+  outline: 0 none;
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+
+.container {
+  padding: 16px;
+  margin-top:30px;
+}
+
+
+/* Change styles for span on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+    display: block;
+    float: none;
+  }
+}

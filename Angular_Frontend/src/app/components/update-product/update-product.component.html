@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<form class="container" *ngIf="productToChange">
+  <a id="remove"  routerLink="/displayAllProducts"  class="glyphicon glyphicon-remove"></a>
+  <span class="left">
+    <div><label>Name: </label><input type="text"  value="{{productToChange.name}}" #name requierd></div>
+    <div><label>Brand:  </label><input type="text" value="{{productToChange.brand}}"  #brand requierd></div>
+    <div><label>Quantity: </label><input type="text" value="{{productToChange.quantity}}" #quantity required> </div>
+    <div><label>Price: </label><input type="text" value="{{productToChange.price}}"  #price requierd></div>
+  ` <div class="procesor"><label>Procesor: </label><input type="text" value="{{productToChange.productDetails.procesor}}"  #procesor requierd></div>
+  <div><label>Image: </label><input type="text" value="{{productToChange.image}}" #image></div>
+  </span>
+  <span class="right">
+    <div><label>Sistem de operare: </label><input type="text" value="{{productToChange.productDetails.sistemDeOperare}}"  #sistemDeOperare requierd> </div>
+    <div><label>Memorie RAM: </label><input type="text" value="{{productToChange.productDetails.memorieRam}}"  #memorieRam requierd> </div>
+    <div><label>Memorie interna: </label><input type="text" value="{{productToChange.productDetails.memorieInterna}}"  #memorieInterna requierd> </div>
+    <div><label>Rezolutie: </label><input type="text" value="{{productToChange.productDetails.rezolutie}}"  #rezolutie requierd> </div>
+    <div><label>Rezolutie camera: </label><input type="text" value="{{productToChange.productDetails.rezolutieCamera}}"  #rezolutieCamera requierd> </div>
+    <div><label>Categorie:</label>
+    <select *ngIf="categories" (change)="setNewCategory($event.target.value)" id='mainselection'>
+      <option *ngFor="let q of categories; let i = index"  value="{{q.categoryName}}" >{{q.categoryName}}</option>
+    </select>
+    </div>
+  </span>
+
+  <div>
+    <label>Description: </label><textarea type="text" value="{{productToChange.productDetails.description}}"  #description ></textarea>
+  </div>
+  <h3 *ngIf="errorMessage" style="color: #ff4d4d; text-align:center;">{{errorMessage}}</h3>
+  <button type="submit" (click)="updateProduct(name.value,brand.value,quantity.value,price.value,procesor.value,sistemDeOperare.value,memorieRam.value,memorieInterna.value,rezolutie.value,rezolutieCamera.value,description.value,image.value)" >Update product</button><br/><br/>
+</form>

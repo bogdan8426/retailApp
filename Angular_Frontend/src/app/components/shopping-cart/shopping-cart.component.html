@@ -1,0 +1,42 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<div  *ngIf="shoppingCart?.length>0">
+<div class="container">
+
+   <ul>
+     <div class="row">
+        <li *ngFor="let shop  of shoppingCart;">
+          <div >
+            <div class="col-md-2">
+
+              <img src="../../../assets/images/{{shop.product.image}}" width="100" height="100" style="cursor: pointer;"routerLink="/displayProductDetails" [queryParams]="{productId: shop.product.productId}">
+            </div>
+
+             <div class="col-md-10">
+               <a id="remove"  (click)="deleteProduct(shop.product.productId)"  class="glyphicon glyphicon-trash"></a>
+                  <p class="productName">{{shop.product.name}}</p>
+                  <table>
+                    <tr>
+                      <td>Brand: {{shop.product.brand}}</td>
+                      <td *ngIf="shop.quantity<=shop.product.quantity">Quantity: {{shop.quantity}}</td>
+                      <td *ngIf="shop.quantity>shop.product.quantity">Quantity: <span class="outOfStock">Sold out</span></td>
+                      <td>Price for one item: {{shop.product.price}}</td>
+                    </tr>
+                  </table>
+             </div>
+          </div>
+        </li>
+       </div>
+   </ul>
+
+</div>
+<div class="containerSuma">
+  <h2>Order details</h2>
+  <p><b>Your subtotal:</b> {{sum}}</p>
+  <p><b>Delivery payment: {{delivery}}</b></p>
+  <p><b>Total: {{total}}</b></p>
+  <button type="submit"  routerLink="/order"  [queryParams]="{sumaTotala: total}" [disabled]="!checkOrder">Order</button>
+</div>
+</div>
+<div *ngIf="shoppingCart.length<=0">
+  <form > You haven't selected any products to buy!</form>
+</div>

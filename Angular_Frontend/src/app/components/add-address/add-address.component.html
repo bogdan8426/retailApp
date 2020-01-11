@@ -1,0 +1,11 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<div class="container">
+  <form>
+    <a id="remove"  (click)="backToOrder()"  class="glyphicon glyphicon-remove"></a>
+    <div><label>Street: </label><input type="text"   #street required></div>
+    <div><label>Postal code:  </label><input type="text"   #postal required></div>
+    <div><label>City: </label><input type="text"  #city  required> </div>
+    <div><label>County: </label><input type="text"  #county required></div>
+    <button class="button" type="submit" (click)="addAddress(street.value,postal.value,city.value,county.value)" >Add address</button><br/><br/>
+  </form>
+</div>

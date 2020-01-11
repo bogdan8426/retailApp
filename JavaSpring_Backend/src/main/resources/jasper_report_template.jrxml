@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="67f6f3b3-e6c0-429f-b266-9ba7195dad9f">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="orderID" class="java.lang.Integer"/>
+	<parameter name="totalPrice" class="java.lang.String"/>
+	<parameter name="numberCodebar" class="java.lang.Integer"/>
+	<queryString language="SQL">
+		<![CDATA[select p.name as 'Name' , a.quantity as 'Quantity', p.price as 'Price' from product p, order_products a where p.product_id=a.product_id and a.order_id=$P{orderID};]]>
+	</queryString>
+	<field name="Name" class="java.lang.String"/>
+	<field name="Quantity" class="java.lang.Integer"/>
+	<field name="Price" class="java.lang.Double"/>
+	<title>
+		<band height="83" splitType="Stretch">
+			<staticText>
+				<reportElement x="230" y="24" width="100" height="30" uuid="cebc7e2f-79f7-4356-bd69-ac45e6be00d4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Bill]]></text>
+			</staticText>
+			<image>
+				<reportElement x="20" y="4" width="50" height="50" uuid="9616a8af-5e6b-4679-acea-9f200f1567b6"/>
+				<imageExpression><![CDATA["src/main/resources/logo.png"]]></imageExpression>
+			</image>
+			<componentElement>
+				<reportElement x="391" y="4" width="100" height="28" uuid="eeb49938-9f8d-4c4a-bdb0-d30726f3c658"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128A" drawText="true" checksumRequired="false" rotation="None">
+					<jr:codeExpression><![CDATA[$P{numberCodebar}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="5" width="69" height="24" uuid="12db18c1-4419-41ed-b8f2-b59f64402736"/>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="5" width="94" height="24" uuid="8dedec36-1371-4990-b680-7c3ddbc7c935"/>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="5" width="69" height="24" uuid="305d017e-2d23-45d9-9745-80b04e8211f2"/>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[Quantity]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="5" width="108" height="24" uuid="6331ed03-7e4a-4772-9eec-f71fd4561214"/>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[Price]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="21" splitType="Immediate">
+			<textField>
+				<reportElement x="0" y="0" width="69" height="20" uuid="0e86af5a-b726-4b27-8702-533f538431be"/>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="0" width="94" height="20" uuid="9bcb367b-6fa2-4276-93af-c43a79b4b662"/>
+				<textFieldExpression><![CDATA[$F{Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="0" width="69" height="20" uuid="158ae36e-ca3e-4f4b-83ea-65e3768425e2"/>
+				<textFieldExpression><![CDATA[$F{Quantity}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="0" width="108" height="20" uuid="1a06fafd-e0d0-4c8b-b98e-c649d7986f6f"/>
+				<textFieldExpression><![CDATA[$F{Price}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="51" splitType="Immediate">
+			<staticText>
+				<reportElement x="360" y="10" width="190" height="24" uuid="f9814089-d6bf-4e4f-8499-26a056d08deb"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total price:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="431" y="10" width="40" height="24" uuid="c345eb82-4993-4cfa-afc1-329aa8a324e3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{totalPrice}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="431" y="17" width="100" height="20" uuid="758fb0f1-e937-4b29-b5a8-1dc9bab9f05e"/>
+				<textElement textAlignment="Left">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[_________________________]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="431" y="7" width="100" height="30" uuid="f1423729-326b-456d-be3f-7c8d61bba322"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Semnatura]]></text>
+			</staticText>
+			<textField pattern="MMM d, yyyy">
+				<reportElement x="0" y="27" width="100" height="15" uuid="e090a82e-9c04-4f66-9bc0-0679cdb8431f"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="7" width="89" height="17" uuid="f3a1b8a7-e1ef-4225-b347-e5aef25130cd"/>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="220" y="24" width="100" height="30" uuid="22be5ca7-c6c6-4ed1-ab05-63e445d5f406"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -1,0 +1,37 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<form class="container" >
+  <a id="remove"  routerLink="/displayAllProducts"  class="glyphicon glyphicon-remove"></a>
+
+
+  <span class="left">
+    <div><label>Name: </label><input type="text"  #name  required></div>
+    <div><label>Brand:  </label><input type="text"   #brand ></div>
+    <div><label>Quantity: </label><input type="text"  #quantity required> </div>
+    <div><label>Price: </label><input type="text"   #price required> </div> <br>
+  ` <div class="procesor"><label>Procesor: </label><input type="text"  #procesor ></div>
+    <div><label>Image: </label><input type="text" #image></div>
+  </span>
+  <span class="right">
+    <div><label>Sistem de operare: </label><input type="text"  #sistemDeOperare > </div>
+    <div><label>Memorie RAM: </label><input type="text"  #memorieRam > </div>
+    <div><label>Memorie interna: </label><input type="text"  #memorieInterna > </div>
+    <div><label>Rezolutie: </label><input type="text"  #rezolutie > </div>
+    <div><label>Rezolutie camera: </label><input type="text"  #rezolutieCamera > </div>
+    <div><label>Categorie:</label>
+      <select *ngIf="categories" (change)="setNewCategory($event.target.value)" id='mainselection'>
+        <option *ngFor="let q of categories; let i = index"  value="{{q.categoryName}}" >{{q.categoryName}}</option>
+      </select>
+    </div>
+  </span>
+  <div><label>Description: </label><textarea type="text"  #description ></textarea> </div>
+  <h3 *ngIf="errorMessage" style="color:#990000;text-align: center">{{errorMessage}}</h3>
+  <button type="submit" (click)="addProduct(name.value,brand.value,quantity.value,price.value,procesor.value,sistemDeOperare.value,memorieRam.value,memorieInterna.value,rezolutie.value,rezolutieCamera.value,description.value, image.value)" >Add product</button><br/><br/>
+</form>
+
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple">
+ <p style="font-size: 35px; color: white; font-weight: bold; text-align: center;">Success! You will be redirected to products page...</p>
+</ngx-spinner>

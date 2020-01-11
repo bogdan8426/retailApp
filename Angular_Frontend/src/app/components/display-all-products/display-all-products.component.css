@@ -1,0 +1,147 @@
+.updatelink{
+  color:white;
+  text-decoration:none;
+}
+
+#pen{
+  color:#e6b800;
+  float:right;
+  margin-right: 10px;
+  text-decoration: none;
+}
+#pen:hover{
+  font-weight: bold;
+  color:darkgoldenrod;
+}
+#remove{
+  color:red;
+  float:right;
+  margin-right: 20px;
+  text-decoration: none;
+}
+#remove:hover{
+  font-weight: bold;
+  color:#990000;
+}
+.plus{
+  color:#444444;
+  text-decoration: none;
+  font-size: 20px;
+  margin-top:20px;
+  margin-right:50px;
+  float:right;
+}
+.plus:hover{
+  font-weight: bold;
+  color:black
+}
+.container1{
+  width:21%;
+  height: auto;
+  margin:0 auto;
+  margin-top:60px;
+  margin-left:50px;
+  padding-top:30px;
+  text-align:center;
+  font-family: arial;
+  display: inline-block;
+  background-color:rgba(50,50,50,0.7);
+  cursor:pointer;
+  color:white;
+  font-size:25px;
+}
+
+.detailsFont{
+  margin-top:10px;
+  margin-bottom:20px;
+}
+
+.container2{
+  width:21%;
+  height: auto;
+  margin:0 auto;
+  margin-top:90px;
+  margin-left:50px;
+  padding-top:30px;
+  text-align:center;
+  font-family: arial;
+  display: inline-block;
+  background-color:rgba(50,50,50,0.7);
+  cursor:pointer;
+  color:white;
+  font-size:25px;
+}
+
+
+#favorite{
+  float:right;
+  font-size: 25px;
+  margin-right:10px;
+  text-decoration: none;
+}
+
+
+.white {
+  color: white;
+}
+.red {
+ color: #990000;
+}
+
+#favoriteAdmin{
+  float:right;
+  font-size: 25px;
+  margin-right:10px;
+  margin-bottom: 10px;
+}
+
+#star{
+  color:yellow;
+  float:left;
+  font-size: 20px;
+}
+#star:hover{
+  color:yellow;
+  text-decoration: none;
+}
+.stars{
+  margin-left:160px;
+}
+
+/* menu */
+.dropdown {
+  float: left;
+
+}
+.dropdown .dropbtn {
+  font-size: 20px;
+  border: none;
+  color: white;
+  padding: 14px 35px;
+  background-color: black;
+  font-family: Arial;
+  margin: 0;
+  width:365px;
+}
+
+.content {
+  background-color: black;
+  min-width: 325px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+  z-index: 1;
+}
+
+.dropdown:hover .dropbtn {
+  background-color:  dimgray;
+  color: white;
+}
+
+.dropdown:hover .content {
+  display: block;
+}
+
+.content a:hover {
+  background-color: #ddd;
+  color: gray;
+}
+

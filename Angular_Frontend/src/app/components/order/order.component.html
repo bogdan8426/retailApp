@@ -1,0 +1,50 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<div class="container">
+  <ul>
+    <li *ngIf="user">
+          <a class="glyphicon glyphicon-user"></a><b class="description"> User details</b> <hr>
+          <b>First name:  </b>{{user.firstName}} <br>
+          <b>Last name:  </b>{{user.lastName}} <br>
+          <b>Email:  </b>{{user.email}} <br>
+          <b>Phone number:  </b>{{user.phoneNumber}} <br>
+    </li>
+    <li  *ngIf="shoppingCart" >
+            <a class="glyphicon glyphicon-shopping-cart"></a><b class="description"> Product details</b>
+             <span *ngFor="let shop of shoppingCart;">
+                <hr>
+                <p class="productName">{{shop.product.name}}</p>
+                <table>
+                <tr>
+                  <td>Brand: {{shop.product.brand}}</td>
+                  <td>Quantity: {{shop.quantity}}</td>
+                  <td>Price for one item: {{shop.product.price}} Ron</td>
+                </tr>
+              </table>
+             </span>
+    </li>
+    <li>
+        <a id="remove" class="glyphicon glyphicon-home"></a><b> Order address</b>
+        <p *ngIf="user.addresses.length<=0">You have no address saved on your account!</p>
+        <ul *ngIf="user.addresses.length>0">
+        <li *ngFor="let myAddress of user.addresses;">
+          <input type="radio" name="gender" value="{{myAddress.addressId}}" (click)="getAddressId(myAddress.streetAddress,myAddress.postalCode,myAddress.cityAddress,myAddress.countyAddress)"> {{myAddress.streetAddress}}, {{myAddress.postalCode}}, {{myAddress.cityAddress}}, {{myAddress.countyAddress}}<br>
+        </li>
+        </ul>
+        <br>
+        <a routerLink="/addAddress"><button>Add new address</button></a>
+    </li>
+    <li>
+        <b class="description">Payment method</b>
+        <br>
+        <select id='mainselection' (change)="setPaymentMethod($event.target.value)">
+          <option  value="cash" >cash</option>
+          <option value="card">card</option>
+        </select>
+        <br>
+        <hr>
+        <b *ngIf="total" class="description">Total: {{total}} Ron</b><hr>
+        <h3 *ngIf="errorMsg" style="color: #990000">You need to select an address!</h3>
+        <button type="submit"  (click)="makeOrder()">Order</button>
+      </li>
+  </ul>
+</div>

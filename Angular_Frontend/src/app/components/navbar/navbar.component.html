@@ -1,0 +1,27 @@
+<div style="text-align:center" *ngIf="nav.visible">
+  <ul class="topnav" >
+    <li><a class="active" routerLink="/home">You are logged as: {{ nav.getUserEmail().email }}</a></li>
+    <li class="right"><a routerLink="/logOut">Log out</a></li>
+    <li class="right"><a routerLink="/displayAllProducts" >Display all products</a></li>
+    <li *ngIf="this.nav.getUserRole()==='user'" class="right"><a routerLink="/shoppingCart">Shopping cart</a></li>
+    <li class="right"><a routerLink="/favoriteList">Favorites({{favoriteList.length}})</a></li>
+    <li class="dropdown" *ngIf="nav.navDropdown">
+      <button class="dropbtn">Display products by category</button>
+      <div class="dropdown-content">
+        <a routerLink="/displayAllProducts"  [queryParams]="{category: category.categoryId}" *ngFor="let category of categories;">{{category.categoryName}}</a>
+      </div>
+    </li>
+    <li  (click)="changeLanguage('ro')">
+      <a><img src="../../../assets/images/flags/ro.png" width="30px" height="20px"></a>
+    </li>
+    <li  (click)="changeLanguage('en')">
+      <a><img src="../../../assets/images/flags/en.png" width="30px" height="20px" ></a>
+    </li>
+    <li  (click)="changeLanguage('es')">
+      <a><img src="../../../assets/images/flags/sp.png" width="30px" height="20px" ></a>
+    </li>
+  </ul>
+</div>
+
+
+

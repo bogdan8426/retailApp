@@ -1,0 +1,21 @@
+<div class="principalReg">
+	<div class="imgcontainerReg">
+    	<img src="../../../assets/images/studentAvatar.png" alt="Avatar" class="avatar">
+  	</div>
+  	<form class="containerReg">
+
+     <p><span class="required">*</span>  <input type="text" placeholder="first name" id="first_name" #firstName required ></p>
+      <p><span class="required">*</span>  <input type="text" placeholder="last name" id="last_name" #lastName required ></p>
+      <p><span class="required">*</span>  <input type="text" placeholder="phone number" id="phone_number" #phoneNumber required maxlength=10></p>
+      <p><span class="required">*</span>  <input type="email" placeholder="email" id="email" #email required ></p>
+      <p><span class="required">*</span>  <input type="password" placeholder="password" id="psw" #password required></p>
+
+      <h3 *ngIf="errorMessage" style="color: #ff4d4d">{{errorMessage}}</h3>
+		<button type="submit" (click)="registerCheck(firstName.value,lastName.value,phoneNumber.value,email.value,password.value)" >Register</button><br/><br/>
+		<a routerLink="/login">Click here to go back to Login</a>
+
+    </form>
+   
+</div>
+
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px',fullScreenBackdrop:true }" [template]="customLoadingTemplate"></ngx-loading>

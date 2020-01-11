@@ -1,0 +1,46 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<a *ngIf="admin" class="plus" routerLink="/addProduct" ><h2>Add a product <b>+</b> </h2></a>
+<a *ngIf="admin" class="plus" routerLink="/displayUsers"  ><h2>Display users  </h2></a>
+
+<br>
+<div *ngIf="admin==false">
+  <div *ngIf="products">
+    <div class="row">
+      <div *ngFor="let product of products;"class="col-md-4" class="container1">
+        <a id="favorite"  class="glyphicon glyphicon-heart white" [ngClass]="{'red': checkProductFav(product) === 'true'}" (click)="addToFavorite(product)"></a>
+        <div  routerLink="/displayProductDetails" [queryParams]="{productId: product.productId}" >
+          <img src="../../../assets/images/{{product.image}}" width="350" height="300"><br>
+         <p> <b>{{product.name}}</b></p>
+
+          <span *ngFor="let s of starsByProduct">
+            <a class="glyphicon glyphicon-star"></a>
+          </span>
+          <div class="detailsFont"><p>  Brand: {{product.brand}} </p><p> Price: {{product.price}} </p> <p><span *ngIf="product.quantity>0">Quantity: {{product.quantity}} </span><span *ngIf="product.quantity<=0">Sold out!</span></p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="admin==true" >
+  <div *ngIf="products">
+    <div class="row" style="margin-left: 255px;">
+      <div *ngFor="let product of products;" class="col-md-4" class="container2">
+        <a id="remove" (click)="removeProduct(product)" class="glyphicon glyphicon-remove"></a>
+        <a id="pen"  class="updatelink" routerLink="/updateProduct" [queryParams]="{productId: product.productId}" class="glyphicon glyphicon-pencil"></a>
+        <a id="favoriteAdmin"  class="glyphicon glyphicon-heart white" [ngClass]="{'red': checkProductFav(product) === 'true'}" (click)="addToFavorite(product)"></a>
+        <a  class="updatelink" routerLink="/displayProductDetails" [queryParams]="{productId: product.productId}">
+          <img src="../../../assets/images/{{product.image}}" width="350" height="300">
+         <p><b>{{product.name}}</b></p> <div class="detailsFont"><p>   Brand: {{product.brand}} </p><p> Price: {{product.price}} </p><p> Quantity: {{product.quantity}}</p></div>
+        </a>
+
+      </div>
+    </div>
+  </div>
+  <!--<p *ngIf="products">{{products | json}}</p>-->
+</div>
+
+
+
+

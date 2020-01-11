@@ -1,0 +1,83 @@
+.principal{
+	width:20%;
+	height: 70%;
+	margin:0 auto;
+	margin-top:170px;
+	text-align:center;
+	font-family: arial;
+
+}
+
+input[type=email], input[type=password] {
+	background-color: rgba(100,100,100,0.9);
+	font-size: 17px;
+	color:white;
+  width: 90%;
+  height: 30px;
+  padding: 12px 20px;
+  margin: 8px 8px;
+  display: inline-block;
+  border:none;
+  outline-color:#990000;
+}
+::placeholder{
+    color:white;
+}
+button {
+    background-color: #990000;
+    font-size: 17px;
+    color: white;
+    padding: 12px 20px;
+    margin: 8px 8px;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+    height: 50px;
+    outline: 0 none;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+a{
+    text-shadow: 2px 2px 4px #000000;
+	font-size: 150%;
+	color: white;
+	padding: 12px 20px;
+	margin: 12px 12px;
+	text-decoration: none;
+    cursor:pointer;
+    margin-left: 20px;
+    font-weight: bold;
+}
+a:hover{
+    text-shadow: 4px 4px 4px #000000;
+}
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+}
+
+img.avatar {
+    width: 40%;
+    border-radius: 50%;
+}
+
+.container {
+    padding: 16px;
+}
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+/* Change styles for span on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+       display: block;
+       float: none;
+    }
+}
+

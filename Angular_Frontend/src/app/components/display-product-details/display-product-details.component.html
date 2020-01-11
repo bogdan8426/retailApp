@@ -1,0 +1,209 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<div class="containerCenter">
+  <ul>
+    <li *ngIf="productToPrint">
+  
+      <div class="container">
+          <a id="remove"  routerLink="/displayAllProducts"  class="glyphicon glyphicon-remove"></a>
+        <div class="row">
+          <div class="col-md-5">
+            <img src="../../../assets/images/{{productToPrint.image}}" style="padding:40px" width="500" height="500">
+          </div>
+          <div class="col-md-7" style="margin-top:70px;">
+            <b style="float:left;margin:10px;" *ngIf="stars.length==0">No rating</b>
+            <b style="float:left;margin:10px;" *ngIf="stars.length!=0">Product rating:</b>
+            <span *ngFor="let s of stars">
+              <a class="glyphicon glyphicon-star"></a>
+            </span><br><br><br>
+            <b style="float:left;margin:10px;">Number of products:</b>
+            <b *ngIf="quantity?.length==0" style="float:left;margin-top:10px;margin-left:15px; color:#990000;">Sold out!</b>
+            <select *ngIf="quantity?.length>1" (change)="setNewQuantity($event.target.value)" id='mainselection'>
+              <option *ngFor="let q of quantity;"  value="{{q}}" >{{q}}</option>
+            </select>
+            <br><br>
+            <button type="submit" (click)="addToShoppingCart()" [disabled]="quantity?.length==0" *ngIf="nav.getUserRole()=='user'">Add to shopping cart</button>
+            <button type="submit"  (click)="addToFavorite()" *ngIf="productOnFavorite=='false'">Add to favourites  <span id="favorite"  class="glyphicon glyphicon-heart white" [ngClass]="{'red': productOnFavorite === 'true'}"></span></button>
+            <button type="submit"  (click)="deleteFromFavorite()" *ngIf="productOnFavorite=='true'">Delete from favourites  <span id="favorite"  class="glyphicon glyphicon-heart white" [ngClass]="{'red': productOnFavorite === 'true'}"></span></button>
+
+           
+            <h3 *ngIf="messageError=='false'">You can select only {{message}}</h3>
+            <h3 *ngIf="messageErrorQuantity==true">{{message}}</h3>
+            <h3 *ngIf="messageError=='true'"><a routerLink="/shoppingCart" id="redirectLink" style="color:white;">Success</a></h3>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li *ngIf="productToPrint">
+      <b class="name">{{productToPrint.name}}</b><br>
+      <table>
+        <tr>
+          <th><b>Brand:</b></th>
+          <th>{{productToPrint.brand}}</th>
+        </tr>
+        <tr>
+          <th><b>Price:</b></th>
+          <th>{{productToPrint.price}}</th>
+        </tr>
+        <tr>
+          <th><b>Quantity:</b></th>
+          <th>{{productToPrint.quantity}}</th>
+        </tr>
+        <tr>
+          <th><b>Procesor:</b></th>
+          <th>{{productToPrint.productDetails.procesor}}</th>
+        </tr>
+        <tr>
+          <th><b>Sistem de operare:</b></th>
+          <th>{{productToPrint.productDetails.sistemDeOperare}}</th>
+        </tr>
+        <tr>
+          <th><b>Memorie RAM:</b></th>
+          <th>{{productToPrint.productDetails.memorieRam}}</th>
+        </tr>
+        <tr>
+          <th><b>Memorie interna:</b> </th>
+          <th>{{productToPrint.productDetails.memorieInterna}}</th>
+        </tr>
+        <tr>
+          <th><b>Rezolutie:</b></th>
+          <th>{{productToPrint.productDetails.rezolutie}}</th>
+        </tr>
+        <tr>
+          <th><b>Rezolutie camera:</b></th>
+          <th>{{productToPrint.productDetails.rezolutieCamera}}</th>
+        </tr>
+        <tr>
+          <th><b>Description:</b></th>
+          <th>{{productToPrint.productDetails.description}}</th>
+        </tr>
+      </table>
+      <button (click)="giveRating()">Give a rating</button>
+    </li>
+
+    <li *ngIf="ratingForm===true">
+      <div class="container" style="animation:2s anim forwards">
+        <div class="row">
+          <div class="col-md-4" style="margin-top:40px;font-size: 25px">
+            <label style="margin-bottom:30px;">Rating: </label><br>
+            <span class="fa fa-star" id="star1" (click)="add(this,1)"></span>
+            <span class="fa fa-star" id="star2" (click)="add(this,2)"></span>
+            <span class="fa fa-star" id="star3" (click)="add(this,3)"></span>
+            <span class="fa fa-star" id="star4" (click)="add(this,4)"></span>
+            <span class="fa fa-star" id="star5" (click)="add(this,5)"></span>
+          </div>
+          <div class="col-md-8" style="margin-top:30px;">
+            <div><label>Description: </label><textarea type="text"  #comment ></textarea> </div>
+            <button class="buttonReview" (click)="insertRating(comment.value)">Add review</button>
+            <div *ngIf="ratingMessage=='success'" ><h3 >Your review was added.</h3></div>
+            <div *ngIf="ratingMessage=='fail'" ><h3 >You already gave a review for this product.</h3></div>
+            <div *ngIf="noStarSelectedMsg" ><h3 >You have to choose a star rating.</h3></div>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li *ngIf="commForm===true">
+      <div calss="container">
+        <div class="row">
+         <h2 style="text-align:center">Review section</h2>
+        </div>
+        <div *ngFor="let rating of ratings ">
+          <div class="row">
+            <div class="col-md-1">
+              <img class="avatar" src="../../../assets/images/user.jpg" width="70" height="70">
+            </div>
+            <div class="col-md-11">
+              <p>{{rating.user.firstName}} {{rating.user.lastName}} :</p>
+            </div>
+            <div class="col-md-11">
+              <span  [ngClass]="{'red': getRatingStars( rating.ratingStars) === 'true'}"></span>
+              <span *ngFor="let s of starsByProduct">
+                    <a class="glyphicon glyphicon-star"></a>
+               </span><br><br>
+            </div>
+            <div class="row">
+              <div class="col-md-11">
+                <h3>Comment: {{rating.comment}}</h3>
+              </div>
+            </div>
+          </div>
+          <hr>
+        </div>
+      </div>
+    </li>
+
+    <li *ngIf="questions">
+      <div calss="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h2 style="text-align:center">Questions section</h2>
+          </div>
+          <div class="col-md-12">
+            <button style="width:20%;margin:20px;" (click)="displayQuestionArea()">Add a question</button>
+          </div>
+        </div>
+        <div class="row">
+          <div *ngIf="showQuestionArea===true" class="addQuestionContainer">
+             <div class="col-md-8">
+              <div><label>Add a question: </label><textarea type="text"  #question ></textarea> </div>
+              </div>
+            <div class="col-md-4">
+              <button style="margin-top:70px;"  (click)="insertQuestion(question.value)">Post</button>
+            </div>
+          </div>
+          <div *ngIf="questionMessage==true"><p style="float:left;margin-left:30px;color:#990000;font-size:25px">Your question should not be empty</p></div>
+        </div><br>
+        <div *ngFor="let question of questions">
+          <div class="row">
+            <div class="col-md-1">
+              <img class="avatar" src="../../../assets/images/user.jpg" width="70" height="70">
+            </div>
+            <div class="col-md-11">
+              <h3>{{question.user.firstName}} {{question.user.lastName}} </h3>
+            </div>
+            <div class="row">
+              <div class="col-md-11">
+                <h3>Question: {{question.questionMessage}}</h3>
+                <span *ngIf="question.user.usersId==nav.getUserId().usersId"><a id="remove" (click)="deleteAnswersByQuestionId(question.questionId)"  class="glyphicon glyphicon-remove"></a></span>
+              </div>
+
+              <div *ngIf="nav.getUserRole()=='admin' || question.user.usersId==nav.getUserId().usersId" class="col-md-11">
+                <a class="answer" (click)="displayAnswerArea(question.questionId)">+ Add an answer</a>
+                <div class="col-md-11" >
+                    <div *ngIf="showAnswerArea===true && questionToAnswer==question.questionId" style="animation:2s anim forwards">
+                      <div class="col-md-8">
+                        <div><textarea type="text"  #answer ></textarea> </div>
+                      </div>
+                      <div class="col-md-4">
+                        <button style="margin-top:30px;"  (click)="insertAnswer(answer.value,question.questionId)">Post</button>
+                      </div>
+                    </div>
+                </div>
+                <div *ngIf="answerMessage==true"><p style="float:left;margin-left:30px;color:#990000;font-size:25px">Your answer should not be empty</p></div>
+              </div>
+              <div  class="col-md-11" style="margin-left:50px;">
+                <div *ngFor="let answer of question.answers">
+                  <div class="row" style="margin-left:30px">
+                    <div  style="margin-top:20px;" class="col-md-1">
+                      <img class="avatar" src="../../../assets/images/user.jpg" width="70" height="70">
+                    </div>
+                    <div class="col-md-11">
+                      <p>{{answer.user.firstName}} {{answer.user.lastName}}  <span *ngIf="nav.getUserRole()=='admin'" style="color:rgb(231, 225, 225); margin-left: 10px; padding-top: -10px;" >Administrator <span class="glyphicon glyphicon-tag"></span></span></p>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-11">
+                        <h3>Answer: {{answer.answerMessage}}</h3>
+                        <span *ngIf="answer.user.usersId==nav.getUserId().usersId"><a id="remove" (click)="deleteAnswer(answer.answerId)"  class="glyphicon glyphicon-remove" style="margin-right:-55px"></a></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><hr>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

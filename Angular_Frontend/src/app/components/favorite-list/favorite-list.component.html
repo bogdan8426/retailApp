@@ -1,0 +1,35 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<div  *ngIf="favoriteList?.length>0">
+    <div class="container">
+
+       <ul>
+         <div class="row" >
+            <li *ngFor="let fav  of favoriteList;">
+              <div>
+                <div class="col-md-2">
+
+                  <img src="../../../assets/images/{{fav.image}}" width="100" height="100" style="cursor: pointer;" routerLink="/displayProductDetails" [queryParams]="{productId: fav.productId}">
+                </div>
+
+                 <div class="col-md-10">
+                   <a id="remove" (click)="deleteProduct(fav.productId)"  class="glyphicon glyphicon-remove"></a>
+                      <p class="productName">{{fav.name}}</p>
+                      <table>
+                        <tr>
+                          <td>Brand: {{fav.brand}}</td>
+                          <td >Quantity: {{fav.quantity}}</td>
+                          <td>Price for one item: {{fav.price}}</td>
+                        </tr>
+                      </table>
+                 </div>
+              </div>
+            </li>
+           </div>
+       </ul>
+
+    </div>
+</div>
+
+<div *ngIf="favoriteList.length<=0">
+    <form > You haven't selected any products to favorite!</form>
+  </div>

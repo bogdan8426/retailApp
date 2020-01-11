@@ -1,0 +1,10 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<a class="plus" routerLink="/displayAllProducts"><h2>Back to products</h2></a>
+<div class="container">
+  <ul *ngIf="usersExceptLoggedOne">
+    <li *ngFor="let user of usersExceptLoggedOne;">
+      <b> Email: {{user.email}}</b><br > First name: {{user.firstName}}, Last name: {{user.lastName}}, Phone number: {{user.phoneNumber}}, Role:<span style=" text-transform: capitalize;"> {{user.role.role_description}}</span> 
+      <button (click)="updateUser(user.email)">Change role</button>
+    </li>
+  </ul>
+</div>
