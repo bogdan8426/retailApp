@@ -26,6 +26,10 @@ export class NavbarService {
     return JSON.parse(data);
   }
 
+  removeUserEmail(){
+    localStorage.removeItem(localStorage.getItem('email'));
+  }
+
   setUserId(data: any) {
     localStorage.setItem('usersId', JSON.stringify(data));
   }
@@ -33,6 +37,10 @@ export class NavbarService {
   getUserId() {
     let data = localStorage.getItem('usersId');
     return JSON.parse(data);
+  }
+
+  removeUserId(){
+    localStorage.removeItem(localStorage.getItem('usersId'));
   }
 
   setUseRole(data: any) {

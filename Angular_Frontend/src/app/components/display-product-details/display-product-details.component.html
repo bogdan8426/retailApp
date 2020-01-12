@@ -189,12 +189,12 @@
                       <img class="avatar" src="../../../assets/images/user.jpg" width="70" height="70">
                     </div>
                     <div class="col-md-11">
-                      <p>{{answer.user.firstName}} {{answer.user.lastName}}  <span *ngIf="nav.getUserRole()=='admin'" style="color:rgb(231, 225, 225); margin-left: 10px; padding-top: -10px;" >Administrator <span class="glyphicon glyphicon-tag"></span></span></p>
+                      <span *ngIf="answer.user.usersId==nav.getUserId().usersId"><a id="remove" (click)="deleteAnswer(answer.answerId)"  class="glyphicon glyphicon-remove" style="margin-right:5px; margin-top:2%; cursor:pointer"></a></span>
+                      <p>{{answer.user.firstName}} {{answer.user.lastName}}  <span *ngIf="answer.user.role.role_description=='admin'" style="color:rgb(231, 225, 225); margin-left: 10px; padding-top: -10px;" >Administrator <span class="glyphicon glyphicon-tag"></span></span></p>
                     </div>
                     <div class="row">
                       <div class="col-md-11">
                         <h3>Answer: {{answer.answerMessage}}</h3>
-                        <span *ngIf="answer.user.usersId==nav.getUserId().usersId"><a id="remove" (click)="deleteAnswer(answer.answerId)"  class="glyphicon glyphicon-remove" style="margin-right:-55px"></a></span>
                       </div>
                     </div>
                   </div>

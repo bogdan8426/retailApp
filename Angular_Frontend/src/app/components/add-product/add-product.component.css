@@ -78,10 +78,9 @@ button {
   margin: 8px 8px;
   border: none;
   cursor: pointer;
-  width: 97%;
   height: 50px;
   outline: 0 none;
-  width:100%;
+  width:99%;
 }
 
 button:hover {

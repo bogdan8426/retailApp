@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -265,8 +266,41 @@ public class BlMailService implements BliMailService {
 		messageHelper.setSubject(mail.getSubject());
 		messageHelper.setText(html, true);
 		mailSender.send(message);
-	}	
-		
+	}
 
+	@Override
+	public void sendChangePasswordEmail(Users userUpdate) {
+		String userEmail = userUpdate.getEmail();
+		String userName = userUpdate.getFirstName()+ " " + userUpdate.getLastName();
+		Base64 base64 = new Base64();
+		String encodeUserEmail = new String(base64.encode(userEmail.getBytes()));
+		Template t=null;
+		try {
+			t = freeMarkerConfig.getTemplate("changePasswordTemplate.ftl");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		Mail mail = new Mail();
+		mail.setFrom("restaurant.mail26@gmail.com");
+		mail.setTo(userEmail);
+		mail.setSubject("Change passsword for your account");
+	
+		
+		Map<String, Object> model = setTemplateRegistrationModelRequestPassword(encodeUserEmail, userName);
+		mail.setModel(model);
+		try {
+			sendMessageSuggestion(mail, t);
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+	}	
+	
+	private Map<String, Object> setTemplateRegistrationModelRequestPassword(String email, String userName) {
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("userName", userName);
+		model.put("userEmail", email);
+		return model;
+	}
 		
 }

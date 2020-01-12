@@ -37,4 +37,9 @@ public class BlQuestionService implements BliQuestionService{
 		
 	}
 
+	@Override
+	public List<Question> getAllQuestion() {
+		return (List<Question>) questionRepository.findAll();
+	}
+
 }

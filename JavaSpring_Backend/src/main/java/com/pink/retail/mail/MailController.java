@@ -29,4 +29,9 @@ public class MailController {
 		mailService.sendRegistrationMail(user);
 	}
 	
+	@RequestMapping(value="/sendRequestPassword", method=RequestMethod.PUT)
+	void sendRequestPassword(@RequestBody Users userRequest)
+	{
+		mailService.sendChangePasswordEmail(userRequest);
+	}
 }

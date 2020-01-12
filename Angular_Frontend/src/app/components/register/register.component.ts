@@ -4,7 +4,6 @@ import { User } from '../../classes/user';
 import { Router } from "@angular/router";
 import { NavbarService } from "../../services/navbar.service";
 import {OrderService} from "../../services/order.service";
-import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-register',
@@ -21,7 +20,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   errorMessage: string = "";
   mailStatus: any;
   public loading = false;
-  constructor(private spinner: NgxSpinnerService,private userService: UserService, private router: Router, public nav: NavbarService, public orderService: OrderService) {
+  constructor(private userService: UserService, private router: Router, public nav: NavbarService, public orderService: OrderService) {
     this.nav.hide();
     this.nav.hideDropdown();
   }

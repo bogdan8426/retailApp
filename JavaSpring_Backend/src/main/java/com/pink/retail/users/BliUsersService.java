@@ -33,4 +33,6 @@ public interface BliUsersService {
 	String addToFavorite(int userId, int productId);
 	
 	String deleteFromFavorite(int userId, int productId);
+	
+	void changePasswordAccount(Users userAccount);
 }

@@ -15,6 +15,7 @@ export class UserService {
 
   private BASE_URL : string ="http://localhost:9000/user/";
 
+  private BASE_URL_ROOT: string="http://localhost:9000/"
 
   findAllUsers() {
   		return this.http.get(this.BASE_URL +'allUsers')
@@ -86,6 +87,16 @@ export class UserService {
     let id=this.nav.getUserId().usersId;
     return this.http.get(this.BASE_URL+id+"/allProductFav")
     .pipe(map((response : Response)=> (<any>response)._body == '' ? null : response.json()));
+  }
+
+  sendRequestChangePassword(userAccount: User){
+    return this.http.put(this.BASE_URL_ROOT+'email/sendRequestPassword',userAccount,{}) 
+    .pipe(map((res : Response) => (<any>res)._body == '' ? null : res.json()));            
+  }
+
+  changePasswordAccount(userAccount:User){
+    return this.http.put(this.BASE_URL+'changeUserPassword',userAccount,{})
+    .pipe(map((res : Response) => (<any>res)._body == '' ? null : res.json())); 
   }
 }
 

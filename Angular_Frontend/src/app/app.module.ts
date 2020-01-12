@@ -31,6 +31,8 @@ import { QuestionService } from './services/question.service';
 import {CookieService} from "angular2-cookie/core";
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxLoadingModule } from 'ngx-loading';
+import { RequestChangePasswordComponent } from './components/request-change-password/request-change-password.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { NgxLoadingModule } from 'ngx-loading';
     ShoppingCartComponent,
     OrderComponent,
     AddAddressComponent,
-    FavoriteListComponent
+    FavoriteListComponent,
+    RequestChangePasswordComponent,
+    ChangePasswordComponent
 
   ],
   imports: [

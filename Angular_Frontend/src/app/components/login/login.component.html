@@ -6,7 +6,8 @@
 
   	<form class="container">
 	    <input type="email" placeholder="Email" id="email" #email  required >
-	    <input type="password" placeholder="Password" id="psw" #password  required>
+		<input type="password" placeholder="Password" id="psw" #password  required>
+		<a routerLink="/requestPassword" style="float:left;" id="forgetPassword">Forget your password? Click here !</a>
 	    <button type="submit" (click)="loginValidation(email.value,password.value)">Login</button><br/><br/>
 	    <a routerLink="/register">Click here to register</a>
 	    <h3 *ngIf="errorMessage" style="color: #ff4d4d">{{errorMessage}}</h3>

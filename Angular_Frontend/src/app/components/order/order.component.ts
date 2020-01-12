@@ -28,7 +28,7 @@ export class OrderComponent implements OnInit, OnDestroy {
   user:User;
   addressSelected:string="";
   errorMsg: boolean;
-
+  public loading=false;
   constructor(public router: Router,public nav : NavbarService,public orderService: OrderService,  private activatedRoute: ActivatedRoute, public datepipe: DatePipe, public shoppingCartService : ShoppingCartService, public userService:UserService){
     this.activatedRoute.queryParams.subscribe(data => {
       this.total= data['sumaTotala']
@@ -61,6 +61,7 @@ export class OrderComponent implements OnInit, OnDestroy {
     }
     else
     {
+      this.loading=true;
       this.order=new Order();
       this.order.totalPrice=this.total;
       this.order.paymentMethod=this.paymentMethod;
@@ -93,6 +94,7 @@ export class OrderComponent implements OnInit, OnDestroy {
     }
     this.orderService.addAllProductToOrder(this.orderProducts).subscribe(data => {this.myOrder= data;});
     this.orderService.sendOrderMail(this.orderProducts).subscribe(data => {this.myOrder=data;
+      this.loading=false;
       this.router.navigate(['/displayAllProducts']);});
 
   }

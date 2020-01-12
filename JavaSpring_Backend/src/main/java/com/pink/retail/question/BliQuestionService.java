@@ -8,4 +8,5 @@ public interface BliQuestionService {
 	Question saveQuestion(Question data);
 	Question updateQuestion(Question data);
 	void removeOneQuestion(int questionId);
+	List<Question> getAllQuestion();
 }

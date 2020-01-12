@@ -67,6 +67,7 @@ export class DisplayProductDetailsComponent implements OnInit, OnDestroy {
     this.getComments();
     this.getQuestionsByProductId();
 
+
   }
 
   ngOnDestroy(){

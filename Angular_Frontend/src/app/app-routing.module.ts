@@ -14,6 +14,8 @@ import {ShoppingCartComponent} from "./components/shopping-cart/shopping-cart.co
 import {OrderComponent} from "./components/order/order.component";
 import { AddAddressComponent } from './components/add-address/add-address.component';
 import { FavoriteListComponent } from './components/favorite-list/favorite-list.component';
+import { RequestChangePasswordComponent } from './components/request-change-password/request-change-password.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 
 const routes: Routes = [
@@ -30,8 +32,9 @@ const routes: Routes = [
   { path: 'shoppingCart', component: ShoppingCartComponent},
   { path: 'order', component: OrderComponent},
   { path: 'addAddress', component: AddAddressComponent},
-  { path:'favoriteList',component: FavoriteListComponent}
-
+  { path:'favoriteList',component: FavoriteListComponent},
+  { path: 'requestPassword', component:RequestChangePasswordComponent},
+  { path: 'changePasswordAccount', component: ChangePasswordComponent}
 ];
 
 @NgModule({

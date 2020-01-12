@@ -40,4 +40,10 @@ public class QuestionController {
 	{
 		return questionService.updateQuestion(question);
 	}
+	
+	@RequestMapping(value="/allQuestion",method=RequestMethod.GET)
+	public List<Question> getAllQuestion()
+	{
+		return questionService.getAllQuestion();
+	}
 }

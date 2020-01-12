@@ -33,13 +33,14 @@ export class LoginComponent implements OnInit , OnDestroy{
 
   loginValidation(email,password) {
     this.user = new User();
-    this.user.email = email;
-    this.user.password = password;
-    this.nav.email = email;
+    this.user.email = email.trim();
+    this.user.password = password.trim();
+    this.nav.email = email.trim();
 
-    this.userService.loginValidation(this.user).subscribe(data => {
+    this.userService.registerEmailValidation(this.user).subscribe(data => {
       this.foundUser = data;
       document.getElementById("email").style.border = "none";
+      document.getElementById("psw").style.border = "none";
       if(this.foundUser!=null){
         console.log(data);
         this.nav.setUserEmail(this.user);
@@ -55,18 +56,21 @@ export class LoginComponent implements OnInit , OnDestroy{
   }
 
   loginCheck(){
-    document.getElementById("psw").style.border = "none";
-  	if(this.foundUser!=null){
-      this.spinner.show();
-      setTimeout(() => {
-        console.log("intra in spinner");
-          this.spinner.hide();
-          this.router.navigate(['/home']);
-      }, 2000); 
-  	}else{
-      document.getElementById("psw").style.border = "thin solid #ff4d4d";
-  		this.errorMessage='Incorrect password';
-  	}
+
+    this.userService.loginValidation(this.user).subscribe(data => {
+      if(data!=null){
+        this.spinner.show();
+        setTimeout(() => {
+          console.log("intra in spinner");
+            this.spinner.hide();
+            this.router.navigate(['/home']);
+        }, 2000); 
+      }else{
+        document.getElementById("psw").style.border = "thin solid #ff4d4d";
+        this.errorMessage='Incorrect password';
+      }
+    })
+
   }
 
   setUserRole(){

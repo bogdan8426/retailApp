@@ -19,6 +19,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
   errorMessage: string="";
   categoryName: string = "Laptop";
   categories: Category[] = [];
+  public loading=false;
   constructor(private spinner: NgxSpinnerService,private productService: ProductService, private router: Router, public nav: NavbarService, private categoryService: CategoryService) {
     this.nav.show();
     this.getAllCategory();
@@ -37,19 +38,19 @@ export class AddProductComponent implements OnInit, OnDestroy {
     if (this.isValidPrice(price)==true) {
       if (this.isValidPrice(quantity)==true) {
         this.product = new Product();
-        this.product.name = name;
-        this.product.brand = brand;
-        this.product.quantity = quantity;
-        this.product.price = price;
-        this.product.image = image;
+        this.product.name = name.trim();
+        this.product.brand = brand.trim();
+        this.product.quantity = quantity.trim();
+        this.product.price = price.trim();
+        this.product.image = image.trim();
         this.product.productDetails = new ProductDetails();
-        this.product.productDetails.procesor = procesor;
-        this.product.productDetails.sistemDeOperare = sistemDeOperare;
-        this.product.productDetails.memorieRam = memorieRam;
-        this.product.productDetails.memorieInterna = memorieInterna;
-        this.product.productDetails.rezolutie = rezolutie;
-        this.product.productDetails.rezolutieCamera = rezolutieCamera;
-        this.product.productDetails.description = description;
+        this.product.productDetails.procesor = procesor.trim();
+        this.product.productDetails.sistemDeOperare = sistemDeOperare.trim();
+        this.product.productDetails.memorieRam = memorieRam.trim();
+        this.product.productDetails.memorieInterna = memorieInterna.trim();
+        this.product.productDetails.rezolutie = rezolutie.trim();
+        this.product.productDetails.rezolutieCamera = rezolutieCamera.trim();
+        this.product.productDetails.description = description.trim();
         this.product.category = new Category();
         if (name != '' && quantity != '' && price != '' && brand != '' && sistemDeOperare != '' && memorieRam != '' && memorieInterna != '' && rezolutie != '' && rezolutieCamera != '' && description != '') {
           this.categoryService.getCategoryByName(this.categoryName).subscribe((data: Category) => {
@@ -57,10 +58,10 @@ export class AddProductComponent implements OnInit, OnDestroy {
             this.product.category.categoryName = data.categoryName;
             this.productService.addProduct(this.product).subscribe(data => {
               console.log(data);
-              this.spinner.show();
+              this.loading=true;
               setTimeout(() => {
                 console.log("intra in spinner");
-                  this.spinner.hide();
+                  this.loading=false;
                   this.router.navigate(['/displayAllProducts']);
               }, 2000); 
 

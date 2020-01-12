@@ -1,7 +1,7 @@
 <div style="text-align:center" *ngIf="nav.visible">
   <ul class="topnav" >
     <li><a class="active" routerLink="/home">You are logged as: {{ nav.getUserEmail().email }}</a></li>
-    <li class="right"><a routerLink="/logOut">Log out</a></li>
+    <li class="right"><a (click)="logOut()" style="cursor: pointer;">Log out</a></li>
     <li class="right"><a routerLink="/displayAllProducts" >Display all products</a></li>
     <li *ngIf="this.nav.getUserRole()==='user'" class="right"><a routerLink="/shoppingCart">Shopping cart</a></li>
     <li class="right"><a routerLink="/favoriteList">Favorites({{favoriteList.length}})</a></li>

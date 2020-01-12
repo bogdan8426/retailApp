@@ -14,4 +14,5 @@ public interface BliMailService {
 	public void sendOrderMail(List<OrderProducts> orderProducts) ;
 	public void sendSuggestionsMail();
 	public void sendRegistrationMail(Users user);
+	public void sendChangePasswordEmail(Users userUpdate);
 }

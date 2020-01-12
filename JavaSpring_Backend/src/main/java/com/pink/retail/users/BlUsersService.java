@@ -2,6 +2,7 @@ package com.pink.retail.users;
 
 import java.util.List;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -147,5 +148,12 @@ public class BlUsersService implements BliUsersService {
 		updateUser(myUserFromFavorite);
 		return "false";
 		
+	}
+
+	@Override
+	public void changePasswordAccount(Users userAccount) {
+		Users newUser=usersRepository.findByemail(new String(Base64.decodeBase64(userAccount.getEmail())));
+		newUser.setPassword(userAccount.getPassword());
+		usersRepository.save(newUser);
 	}
 }

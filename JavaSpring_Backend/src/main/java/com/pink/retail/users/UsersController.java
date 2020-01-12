@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pink.retail.address.Address;
 import com.pink.retail.product.Product;
+import com.pink.retail.util.BliUtilityService;
 
 
 @RestController
@@ -19,6 +20,9 @@ public class UsersController {
 
 	@Autowired
 	BliUsersService userService;
+	
+	@Autowired
+	BliUtilityService utilityService;
 	
 	@RequestMapping(value="/allUsers",method=RequestMethod.GET)
 	public List<Users> getAllUser()
@@ -111,6 +115,12 @@ public class UsersController {
 	public List<Product> getAllFavoriteProducts(@PathVariable int idUser)
 	{
 		return userService.getUserById(idUser).getProducts();
+	}
+	
+	@RequestMapping(value="/changeUserPassword", method=RequestMethod.PUT)
+	public void changePasswordAccount(@RequestBody Users userAccount) {
+		userAccount.setPassword(utilityService.encryptThisString(userAccount.getPassword()));
+		userService.changePasswordAccount(userAccount); 
 	}
 	
 }
